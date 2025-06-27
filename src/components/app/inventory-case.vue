@@ -36,7 +36,9 @@ const handleSelect = (item: number, isChecked: boolean) => {
   }
 
   const result = multi
-    ? items.filter((i) => selectedItems.value.includes(i.id))
+    ? selectedItems.value.map((id) => {
+        return items.find((i) => i.id === id)
+      })
     : items.find((i) => selectedItems.value.includes(i.id))
 
   emit('onSelect', result)
@@ -78,7 +80,7 @@ const handleSelect = (item: number, isChecked: boolean) => {
       z-index: -100;
       opacity: 0;
       visibility: hidden;
-      &:checked  {
+      &:checked {
         & + div {
           background-color: #d9d9d9;
           border: 2px solid #000;
